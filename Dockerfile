@@ -1,12 +1,13 @@
-FROM ubuntu:16.04
+FROM centos:7.4.1708
 
-RUN apt-get update
+RUN rm -rf /etc/yum.repos.d/* \
+    && curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
+    && curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo \
+    && yum -y install python-pip gcc python-devel libffi-devel openssl-devel vim wget createrepo mysql-devel \
+    && rm -rf /var/cache/*
 
-RUN apt-get -y install rng-tools reprepro createrepo python-pip python-dev libffi-dev libssl-dev
+RUN pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip setuptools pip2pi
 
-RUN pip install pip2pi
-RUN pip install --upgrade setuptools
+RUN mkdir /sources /repository
 
-COPY keys /keys/
-
-RUN gpg --allow-secret-key-import --import /keys/private.key
+WORKDIR /repository

@@ -12,20 +12,14 @@
     方式一:
         将提前下载完成的包拷贝到/sources/目录下
     方式二:
-        $ pip2tgz /sources/ -i https://mirrors.aliyun.com/pypi/simple/ docker
-        $ pip2tgz /sources/ -i https://mirrors.aliyun.com/pypi/simple/ -r packages_list.txt
+        $ pip2tgz mirrors/pypi/ -i https://mirrors.aliyun.com/pypi/simple/ docker
+        $ pip2tgz mirrors/pypi/ -i https://mirrors.aliyun.com/pypi/simple/ -r packages_list.txt
     ```
 
 * 创建索引
 
     ```
-    $ dir2pi -S /sources/
-    ```
-
-* 拷贝仓库
-
-    ```
-    $ mv /sources/simple/ /repository/mirrors/pypi/
+    $ dir2pi -S mirrors/pypi/
     ```
 
 * pip.conf
@@ -38,7 +32,6 @@
     [install]
     trusted-host =  127.0.0.1
     ```
-
 ## centos
 
 
